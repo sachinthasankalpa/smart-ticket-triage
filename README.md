@@ -57,12 +57,13 @@ A Laravel 11 + Vue 3 application for classifying and triaging support tickets. I
 
 8) Build front‑end assets
    ```bash
-   npm run dev
-   # or npm run build
+   npm run build
+   # or npm run dev
    ```
 
 9) Open the app
    - Visit: http://localhost
+   - Visit the Horizon dashboard to monitor classification jobs http://localhost/horizon
 
 10) (Optional) Run bulk classification
    ```bash
@@ -75,6 +76,35 @@ A Laravel 11 + Vue 3 application for classifying and triaging support tickets. I
 - Background jobs: You do NOT need to run `queue:work` manually. The `worker` service is started by Sail and processes the Redis queue automatically.
 - Supervisor + Horizon: The worker container runs Horizon under Supervisor to ensure the process is kept alive. 
 - After the stack is up, open the Horizon dashboard at /horizon (e.g., http://localhost/horizon)
+
+## What I’d do with more time
+
+- Robustness and scalability
+    - Introduce idempotency and deduplication on classification jobs.
+    - Add backoff/retry strategies tuned to API error types and rate limits.
+    - Cache computed statistics and invalidate on writes to reduce DB load.
+
+- Improve AI classification quality
+    - Tune model parameters: temperature, top_p, presence/frequency penalties, revisit max_tokens per response to avoid truncation.
+    - Enhance prompts: refine the system prompt, expand/refresh few‑shot examples to better represent real tickets.
+
+- Implement Full Authentication
+    - Integrate Laravel Sanctum for API authentication and create a full login/registration flow on the Vue frontend.
+
+- Adopt Pinia for State Management:
+    - Refactor the simple reactive stores into a formal Pinia store. This would provide better structure, devtools support for easier debugging, and a more scalable pattern for managing application state.
+
+- Build a Robust Testing Suite:
+    - Backend:
+        - Write feature tests with Pest/PHPUnit to cover all API endpoints and business logic.
+    - Frontend:
+        - Use Vitest and Vue Testing Library to write unit and integration tests for all Vue components.
+
+- Styling quality
+    - Improve the use of BEM naming conventions.
+
+- Advanced Frontend Filtering:
+    - Add more advanced, client-side controls to the ticket list to filter by status or category.
 
 ## Assumptions & Trade-offs
 
@@ -94,28 +124,3 @@ A Laravel 11 + Vue 3 application for classifying and triaging support tickets. I
 
 - Testing: 
     - The project does not include an automated testing. This was a deliberate trade-off to focus on delivering the required features within the time constraints.
-
-## What I’d do with more time
-
-- Robustness and scalability
-    - Introduce idempotency and deduplication on classification jobs.
-    - Add backoff/retry strategies tuned to API error types and rate limits.
-    - Cache computed statistics and invalidate on writes to reduce DB load.
-
-- Implement Full Authentication
-    - Integrate Laravel Sanctum for API authentication and create a full login/registration flow on the Vue frontend.
-
-- Adopt Pinia for State Management: 
-    - Refactor the simple reactive stores into a formal Pinia store. This would provide better structure, devtools support for easier debugging, and a more scalable pattern for managing application state.
-
-- Build a Robust Testing Suite: 
-  - Backend: 
-    - Write feature tests with Pest/PHPUnit to cover all API endpoints and business logic.
-  - Frontend: 
-    - Use Vitest and Vue Testing Library to write unit and integration tests for all Vue components.
-
-- Styling quality
-    - Improve the use of BEM naming conventions.
-
-- Advanced Frontend Filtering: 
-    - Add more advanced, client-side controls to the ticket list to filter by status or category.
