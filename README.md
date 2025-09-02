@@ -9,7 +9,7 @@ A Laravel 11 + Vue 3 application for classifying and triaging support tickets. I
    ```bash
    bash
    git clone https://github.com/sachinthasankalpa/smart-ticket-triage.git smart-ticket-triage
-   cd smart-ticket-triage
+   cd smart-ticket-triage 
    ```
 
 2) Create your environment file
