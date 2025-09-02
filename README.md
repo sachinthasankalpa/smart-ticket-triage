@@ -23,6 +23,15 @@ A Laravel 11 + Vue 3 application for classifying and triaging support tickets. I
    ```bash
    composer install
    ```
+   - If composer is not installed locally
+   ```bash
+   docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php82-composer:latest \
+    composer install --ignore-platform-reqs
+   ```
 
 4) Start the Dockerized stack with Sail
    - Boots PHP (laravel.test), MySQL, Redis, and the background worker.
