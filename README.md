@@ -7,9 +7,8 @@ A Laravel 11 + Vue 3 application for classifying and triaging support tickets. I
 1) Clone the repository
    - Why: Get the project source locally.
    ```bash
-   bash
    git clone https://github.com/sachinthasankalpa/smart-ticket-triage.git smart-ticket-triage
-   cd smart-ticket-triage
+   cd smart-ticket-triage 
    ```
 
 2) Create your environment file
@@ -17,45 +16,38 @@ A Laravel 11 + Vue 3 application for classifying and triaging support tickets. I
      - QUEUE_CONNECTION=redis (so jobs go to Redis)
      - OPENAI_API_KEY=... (required if AI classification is enabled)
    ```bash
-   bash
    cp .env.example .env
    ```
 
 3) Install PHP dependencies
    ```bash
-   bash
    composer install
    ```
 
 4) Start the Dockerized stack with Sail
    - Boots PHP (laravel.test), MySQL, Redis, and the background worker.
    ```bash
-   bash
    ./vendor/bin/sail up -d
    ```
 
 5) Generate app key 
    ```bash
-   bash
    ./vendor/bin/sail artisan key:generate
    ```
 
 6) Run database migrations and seeders
    ```bash
-   bash
    ./vendor/bin/sail artisan migrate
    ./vendor/bin/sail artisan db:seed
    ```
 
 7) Install Node.js dependencies
    ```bash
-   bash
    npm install
    ```
 
 8) Build front‑end assets
    ```bash
-   bash
    npm run dev
    # or npm run build
    ```
@@ -65,7 +57,6 @@ A Laravel 11 + Vue 3 application for classifying and triaging support tickets. I
 
 10) (Optional) Run bulk classification
    ```bash
-   bash
    ./vendor/bin/sail artisan tickets:bulk-classify
 #./vendor/bin/sail artisan tickets:bulk-classify --count=1000 --only-unclassified=false --chunk=100
    ```
